@@ -26,11 +26,11 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        public void InitializeComponent()
+        private void InitializeComponent()
         {
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.richTextBox = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -43,28 +43,29 @@
             this.StatusStrip.TabIndex = 0;
             this.StatusStrip.Text = "statusStrip1";
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(12, 25);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 1;
-            // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(12, 51);
+            this.pictureBox1.Location = new System.Drawing.Point(12, 173);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 50);
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
+            // 
+            // richTextBox
+            // 
+            this.richTextBox.Location = new System.Drawing.Point(12, 12);
+            this.richTextBox.Name = "richTextBox";
+            this.richTextBox.Size = new System.Drawing.Size(176, 140);
+            this.richTextBox.TabIndex = 3;
+            this.richTextBox.Text = "";
             // 
             // ChildForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(606, 377);
+            this.Controls.Add(this.richTextBox);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.StatusStrip);
             this.Name = "ChildForm";
             this.Text = "ChildForm";
@@ -77,7 +78,7 @@
         #endregion
 
         private System.Windows.Forms.StatusStrip StatusStrip;
-        public System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        public System.Windows.Forms.RichTextBox richTextBox;
     }
 }

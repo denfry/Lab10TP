@@ -1,20 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
-using static Lab10TP.ChildForm;
 
 namespace Lab10TP
 {
     public partial class MainForm : Form
     {
-        private ChildForm _editableChildForm;
+        private ChildForm _editableChildForm = new ChildForm();
+        ChildForm childForm1 = new ChildForm();
+        ChildForm childForm2 = new ChildForm();
         public MainForm()
         {
             InitializeComponent();
@@ -50,18 +45,20 @@ namespace Lab10TP
             openFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                if (ActiveMdiChild is ChildForm childForm)
-                {
+                if(ActiveMdiChild is ChildForm childForm)
+                
                     try
                     {
-                        childForm.textBox1.Text = File.ReadAllText(openFileDialog.FileName);
+                        string fileContent = File.ReadAllText(openFileDialog.FileName);
+                        childForm.richTextBoxText = fileContent;
                         childForm.SetStatus(openFileDialog.SafeFileName);
+                        
                     }
                     catch (Exception ex)
                     {
                         MessageBox.Show($"Ошибка при открытии файла: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                }
+                
             }
         }
 
@@ -73,8 +70,7 @@ namespace Lab10TP
                 saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    // Сохраняем содержимое активной формы в текстовый файл
-                    File.WriteAllText(saveFileDialog.FileName, childForm.textBox1.Text);
+                    File.WriteAllText(saveFileDialog.FileName, childForm.richTextBox.Text);
                     childForm.SetStatus(saveFileDialog.FileName);
                 }
             }
@@ -98,37 +94,34 @@ namespace Lab10TP
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            int formWidth = (this.ClientSize.Width - 10) / 2; // ширина формы будет половиной ширины главной формы с учетом разделителя
-            int formHeight = (this.ClientSize.Height - 10) / 2; // высота формы будет равна высоте главной формы без горизонтального скролла
+            int formWidth = (this.ClientSize.Width - 10) / 2;
+            int formHeight = (this.ClientSize.Height - 10) / 2;
             int formHeightPicture = this.ClientSize.Height - 10;
-            int form1LocationX = 0; // начальная координата X для первой формы
-            int form1LocationY = 0; // начальная координата Y для первой формы
-            int form2LocationX = 0; // начальная координата X для второй формы
-            int form2LocationY = formHeight + 10; // начальная координата Y для второй формы
+            int form1LocationX = 0;
+            int form1LocationY = 0;
+            int form2LocationX = 0;
+            int form2LocationY = formHeight + 10;
 
-            // Создаем и настраиваем первую форму с текстом
-            ChildForm childForm1 = new ChildForm();
+            
             childForm1.MdiParent = this;
             childForm1.Text = "Text Form 1";
-            childForm1.Size = new Size(formWidth, formHeight); // устанавливаем размер формы
-            childForm1.Location = new Point(form1LocationX, form1LocationY); // устанавливаем расположение формы
+            childForm1.Size = new Size(formWidth, formHeight);
+            childForm1.Location = new Point(form1LocationX, form1LocationY);
             childForm1.Show();
 
-            // Создаем и настраиваем вторую форму с текстом
-            ChildForm childForm2 = new ChildForm();
+            
             childForm2.MdiParent = this;
             childForm2.Text = "Text Form 2";
-            childForm2.Size = new Size(formWidth, formHeight); // устанавливаем размер формы
-            childForm2.Location = new Point(form2LocationX, form2LocationY); // устанавливаем расположение формы
+            childForm2.Size = new Size(formWidth, formHeight);
+            childForm2.Location = new Point(form2LocationX, form2LocationY);
             childForm2.Show();
 
-            // Создаем и настраиваем форму с редактируемым рисунком
-            ChildForm _editableChildForm = new ChildForm();
+            
             _editableChildForm.MdiParent = this;
             _editableChildForm.Text = "Editable Picture Form";
             _editableChildForm.SetEditable(true);
-            _editableChildForm.Size = new Size(formWidth, formHeightPicture); // устанавливаем размер формы
-            _editableChildForm.Location = new Point(formWidth, 0); // устанавливаем расположение формы
+            _editableChildForm.Size = new Size(formWidth, formHeightPicture);
+            _editableChildForm.Location = new Point(formWidth, 0);
             _editableChildForm.Show();
 
         }

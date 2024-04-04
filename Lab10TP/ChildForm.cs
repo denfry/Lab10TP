@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Lab10TP
@@ -29,11 +23,12 @@ namespace Lab10TP
             pictureBox1.MouseHover += PictureBox_MouseHover;
             this.Controls.Add(pictureBox1);
 
-            textBox1 = new TextBox();
-            textBox1.Multiline = true;
-            textBox1.Dock = DockStyle.Fill;
-            textBox1.ScrollBars = ScrollBars.Vertical;
-            this.Controls.Add(textBox1);
+            richTextBox = new RichTextBox();
+            richTextBox.ReadOnly = false;
+            richTextBox.Multiline = true;
+            richTextBox.Dock = DockStyle.Fill;
+            richTextBox.ScrollBars = RichTextBoxScrollBars.Vertical;
+            this.Controls.Add(richTextBox);
 
             this.StatusStrip = new StatusStrip();
             this.Controls.Add(StatusStrip);
@@ -42,7 +37,10 @@ namespace Lab10TP
             statusLabel.Text = "No file opened";
             StatusStrip.Items.Add(statusLabel);
         }
-
+        public string richTextBoxText
+        {
+            set { richTextBox.Text = value; }
+        }
         public void SetEditable(bool editable)
         {
             if (editable)
@@ -68,7 +66,6 @@ namespace Lab10TP
 
         private void PictureBox_MouseDown(object sender, MouseEventArgs e)
         {
-            // Реализация рисования на pictureBox
             Graphics g = pictureBox1.CreateGraphics();
             g.DrawEllipse(new Pen(Color.Red, 2), e.X, e.Y, 50, 50);
             g.Dispose();
