@@ -8,23 +8,18 @@ namespace Lab10TP
 {
     public partial class MainForm : Form
     {
-        public delegate void SetEditableDelegate();
-        public delegate void ClearCirclesDelegate();
-
-        public SetEditableDelegate SetEditableHandler;
-        public ClearCirclesDelegate ClearCirclesHandler;
-
         ChildForm1 childForm1 = new ChildForm1();
         ChildForm2 childForm2 = new ChildForm2();
         ChildForm3 childForm3 = new ChildForm3();
+      
+        private bool isEditable = false;
+       
 
         public MainForm()
         {
             InitializeComponent();
             this.IsMdiContainer = true;
             this.Load += new EventHandler(MainForm_Load);
-            SetEditableHandler = new SetEditableDelegate(childForm3.SetEditableItem_Click);
-            ClearCirclesHandler = new ClearCirclesDelegate(childForm3.ClearCircles);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -136,12 +131,21 @@ namespace Lab10TP
 
         private void ChildForm3_SetEditableItem_Click(object sender, EventArgs e)
         {
-            SetEditableHandler?.Invoke();
+            if (isEditable)
+            {
+                childForm3.SetEditableItem_Click();
+                isEditable = false;
+            }
+            else
+            {
+                childForm3.SetEditableItem_Click();
+                isEditable = true;
+            }
         }
 
         private void ChildForm3_ClearCircles_Click(object sender, EventArgs e)
         {
-            ClearCirclesHandler?.Invoke();
+            childForm3.ClearCircles();
         }
     }
 }

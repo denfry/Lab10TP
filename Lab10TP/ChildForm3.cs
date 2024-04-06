@@ -92,24 +92,19 @@ namespace Lab10TP
 
         private void PictureBox_MouseDown(object sender, MouseEventArgs e)
         {
-            // Создаем Graphics для рисования на PictureBox
+            
             using (Graphics g = pictureBox1.CreateGraphics())
             {
-                // Определяем параметры круга
                 int radius = 50;
                 int diameter = radius * 2;
 
-                // Вычисляем координаты верхнего левого угла описанного прямоугольника для круга
                 int x = e.X - radius;
                 int y = e.Y - radius;
 
-                // Рисуем круг
                 g.DrawEllipse(Pens.Red, x, y, diameter, diameter);
 
-                // Добавляем круг в список
                 circles.Add((new Point(x + radius, y + radius), radius));
 
-                // Генерируем событие обновления кругов
                 CirclesUpdated?.Invoke(this, circles);
             }
         }
@@ -121,35 +116,28 @@ namespace Lab10TP
             ((ToolStripStatusLabel)this.StatusStrip3.Items[0]).Text = fileName;
         }
 
-
-
         public void SaveImageWithCircles(string imagePath)
         {
             try
             {
                 if (circles.Any())
                 {
-                    // Создаем новое изображение и графический контекст для рисования на нем
                     Bitmap bmp = new Bitmap(pictureBox1.Width, pictureBox1.Height);
                     Graphics g = Graphics.FromImage(bmp);
 
-                    // Нарисуйте изображение на графическом контексте
                     g.DrawImage(pictureBox1.Image, Point.Empty);
 
-                    // Добавьте рисование кружков
                     foreach (var circle in circles)
                     {
                         g.DrawEllipse(Pens.Red, circle.center.X - circle.radius, circle.center.Y - circle.radius, circle.radius * 2, circle.radius * 2);
                     }
 
-                    // Сохраняем изображение в указанный путь
                     bmp.Save(imagePath, System.Drawing.Imaging.ImageFormat.Jpeg);
                     bmp.Dispose();
                     SetStatus("Файл сохранен: " + imagePath);
                 }
                 else
                 {
-                    // Если не было нарисовано кружков, сохраняем изображение в обычном формате
                     pictureBox1.Image.Save(imagePath, System.Drawing.Imaging.ImageFormat.Jpeg);
                     SetStatus("Файл сохранен: " + imagePath);
                 }
