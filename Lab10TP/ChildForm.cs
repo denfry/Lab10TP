@@ -13,6 +13,8 @@ namespace Lab10TP
         {
             InitializeComponent();
             InitializeComponents();
+            StartPosition = FormStartPosition.Manual;
+            Location = new Point(0, 0);
         }
 
         public void InitializeComponents()
