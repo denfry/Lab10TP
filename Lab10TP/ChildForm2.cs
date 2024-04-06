@@ -1,15 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Lab10TP
 {
-    public partial class ChildForm1 : Form
+    public partial class ChildForm2 : Form
     {
         private string fileName;
         public ToolStripMenuItem OpenMenuItem { get; private set; }
         public ToolStripMenuItem SaveMenuItem { get; private set; }
-        public ChildForm1()
+        public ChildForm2()
         {
             InitializeComponent();
             InitializeComponents();
@@ -17,15 +23,16 @@ namespace Lab10TP
 
         public void InitializeComponents()
         {
-            richTextBox1.ReadOnly = false;
-            richTextBox1.Multiline = true;
-            richTextBox1.Dock = DockStyle.Fill;
-            richTextBox1.ScrollBars = RichTextBoxScrollBars.Vertical;
-            
+
+            richTextBox2.ReadOnly = false;
+            richTextBox2.Multiline = true;
+            richTextBox2.Dock = DockStyle.Fill;
+            richTextBox2.ScrollBars = RichTextBoxScrollBars.Vertical;
+
 
             ToolStripStatusLabel statusLabel = new ToolStripStatusLabel();
             statusLabel.Text = "Файл не выбран";
-            StatusStrip1.Items.Add(statusLabel);
+            StatusStrip2.Items.Add(statusLabel);
 
             ToolStripMenuItem fileMenuItem = new ToolStripMenuItem("Файл");
             OpenMenuItem = new ToolStripMenuItem("Открыть");
@@ -34,15 +41,17 @@ namespace Lab10TP
             fileMenuItem.DropDownItems.Add(OpenMenuItem);
             fileMenuItem.DropDownItems.Add(SaveMenuItem);
 
-            menuStrip1.Items.Add(fileMenuItem);
+            menuStrip2.Items.Add(fileMenuItem);
 
-            
+
         }
+
+
 
         public void SetStatus(string fileName)
         {
             this.fileName = fileName;
-            ((ToolStripStatusLabel)this.StatusStrip1.Items[0]).Text = fileName;
+            ((ToolStripStatusLabel)this.StatusStrip2.Items[0]).Text = fileName;
         }
 
     }
