@@ -37,7 +37,7 @@ namespace Lab10TP
             pictureBox1.MouseHover += PictureBox_MouseHover;
 
             ToolStripStatusLabel statusLabel = new ToolStripStatusLabel();
-            statusLabel.Text = "No file opened";
+            statusLabel.Text = "Файл не выбран";
             StatusStrip3.Items.Add(statusLabel);
 
             ToolStripMenuItem fileMenuItem = new ToolStripMenuItem("Файл");
